@@ -12,7 +12,14 @@ class HomeController extends Controller
 		'tittle' => 'Home Page'
 		);
 		
-		return view('index',$data);
-		//return view('home',$data);
+		//return view('index',$data);
+		return view('home',$data);
 	}
+	
+    public function home()
+    {
+        return view('home');
+
+        return abort(403);
+    }
 }

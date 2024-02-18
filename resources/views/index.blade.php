@@ -43,7 +43,7 @@
                             <div class="card-body pt-5">
                                 <a class="text-center" href="index.html"> <h4>Silahkan Login</h4></a>
         
-                                <form class="mt-5 mb-5 login-input" method="POST" action="">
+                                <form class="mt-5 mb-5 login-input" method="POST" action="{{ route('cek_login') }}">
 								@csrf
                                     <div class="form-group">
                                         <input type="email" class="form-control" placeholder="Email" name="email" required>
@@ -72,6 +72,43 @@
     <script src="/assets/js/settings.js"></script>
     <script src="/assets/js/gleek.js"></script>
     <script src="/assets/js/styleSwitcher.js"></script>
+	
+	<script src="/assets/js/sweetalert/sweetalert.min.js"></script>
+	<script src="/assets/js/bootstrap4-notify/bootstrap-notify.min.js"></script>
+	
+	@if (session('error'))
+	<script>
+		var SweetAlert2Demo = function() {
+			var iniDemos = function() {
+				swal({
+					title: "{{ session('error') }}",
+					text: "{{ session('error') }}",
+					icon: "error",
+					buttons: {
+						confirm: {
+							text: "Confirm Me",
+							value: true,
+							visible: true,
+							className: "btn btn-success",
+							closeModal: true
+						}
+					}
+				});
+			};
+			
+			return {
+				init: function() {
+					initDemos();
+				},
+			};
+		}();
+		
+		jquery(document).ready(function() {
+			SweetAlert2Demo.init();
+		});
+	</script>
+	@endif
+	
 </body>
 </html>
 

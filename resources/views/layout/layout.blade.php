@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>{{ $title }}</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
     <!-- Custom Stylesheet -->
@@ -110,8 +110,9 @@
                         </a>
                     </li>
                     <li class="nav-label">UI Components</li>
+					@if (Auth::user()->role == 'admin')
                     <li>
-                        <a href="#" aria-expanded="false">
+                        <a href="/setdiskon" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Setting Diskon</span>
                         </a>
                     </li>
@@ -120,21 +121,24 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Data Master</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Data User</a></li>
-                            <li><a href="#">Data Jenis Barang</a></li>
-                            <li><a href="#">Data Barang</a></li>
+                            <li><a href="/user">Data User</a></li>
+                            <li><a href="/jenisbarang">Data Jenis Barang</a></li>
+                            <li><a href="/barang">Data Barang</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Data Transaksi</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" aria-expanded="false">
+                        <a href="/laporan" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Data Laporan</span>
                         </a>
                     </li>
+					@endif
+					@if (Auth::user()->role == 'kasir')
+                    <li>
+                        <a href="/transaksi" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Data Transaksi</span>
+                        </a>
+                    </li>
+					@endif
 
                 </ul>
             </div>
@@ -143,63 +147,8 @@
             Sidebar end
         ***********************************-->
 
-@extends('layout.layout')
-@section('content')
+		@yield('content')
 
-        <div class="content-body">	
-
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                    </ol>
-                </div>
-            </div>
-            <!-- row -->
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Data Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered zero-configuration">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Role</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Tiger Hood</td>
-                                                <td>User</td>
-                                                <td>
-													<a href="#" class="btn bn-xs btn-primary"><i class="fa fa-edit"></i>Edit</a>
-													<a href="#" class="btn bn-xs btn-danger"><i class="fa fa-trash"></i>Hapus</a>
-												</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #/ container -->
-        </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-@endsection        
-        
         <!--**********************************
             Footer start
         ***********************************-->
@@ -228,6 +177,76 @@
     <script src="/assets/plugins/tables/js/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+	<script src="/assets/js/sweetalert/sweetalert.min.js"></script>
+	<script src="/assets/js/bootstrap4-notify/bootstrap-notify.min.js"></script>
+	
+	@if (session('success'))
+	<script>
+		var SweetAlert2Demo = function() {
+			var iniDemos = function() {
+				swal({
+					title: "{{ session('success') }}",
+					text: "{{ session('success') }}",
+					icon: "success",
+					buttons: {
+						confirm: {
+							text: "Confirm Me",
+							value: true,
+							visible: true,
+							className: "btn btn-success",
+							closeModal: true
+						}
+					}
+				});
+			};
+			
+			return {
+				init: function() {
+					initDemos();
+				},
+			};
+		}();
+		
+		jquery(document).ready(function() {
+			SweetAlert2Demo.init();
+		});
+	</script>
+	@endif
+
+	@if (session('error'))
+	<script>
+		var SweetAlert2Demo = function() {
+			var iniDemos = function() {
+				swal({
+					title: "{{ session('error') }}",
+					text: "{{ session('error') }}",
+					icon: "error",
+					buttons: {
+						confirm: {
+							text: "Confirm Me",
+							value: true,
+							visible: true,
+							className: "btn btn-success",
+							closeModal: true
+						}
+					}
+				});
+			};
+			
+			return {
+				init: function() {
+					initDemos();
+				},
+			};
+		}();
+		
+		jquery(document).ready(function() {
+			SweetAlert2Demo.init();
+		});
+	</script>
+	@endif
+
 
 </body>
 
