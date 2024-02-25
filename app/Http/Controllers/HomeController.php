@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,12 +15,8 @@ class HomeController extends Controller
 		
 		//return view('index',$data);
 		return view('home',$data);
+		//echo "HAlo tes sudah masuk";
+		//echo "<br><a href='logout'>logout</a>";
+		//echo "<h1>". auth()->user()->role ."</h1>";
 	}
-	
-    public function home()
-    {
-        return view('home');
-
-        return abort(403);
-    }
 }

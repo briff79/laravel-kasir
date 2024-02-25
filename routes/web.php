@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JenisBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,19 +18,29 @@ use App\Http\Controllers\UserController;
 |
 */
 
-//login
-Route::get('/',[AuthController::class, 'index'])->name('login');
-Route::post('/cek_login',[AuthController::class, 'cek_login'])->name('cek_login');
-Route::get('/logout',[AuthController::class, 'logout']);
-
-Route::group(['middleware' => ['auth','checkRole:admin']], function(){
-	//crud data user
-	Route::get('/user', [UserController::class, 'index']);
-	Route::post('/user/store', [UserController::class, 'store']);
-	Route::post('/user/update/{id}', [UserController::class, 'update']);
-	Route::get('/user/destroy/{id}', [UserController::class, 'destroy']);
+//jika belum login
+Route::middleware(['guest'])->group(function () {
+	Route::get('/',[AuthController::class, 'index']);
+	Route::post('/',[AuthController::class, 'login']);
 });
 
-Route::group(['middleware' => ['auth','checkRole:admin,kasir']], function() {
-	Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::middleware(['auth'])->group(function () {
+	Route::group(['middleware' => ['auth','checkRole:admin,kasir']], function(){
+		Route::get('/logout',[AuthController::class, 'logout']);
+		Route::get('/home',[HomeController::class, 'index']);
+	});
+	
+	Route::group(['middleware' => ['auth','checkRole:admin']], function(){
+		//crud data user
+		Route::get('/user', [UserController::class, 'index']);
+		Route::post('/user/store', [UserController::class, 'store']);
+		Route::post('/user/update/{id}', [UserController::class, 'update']);
+		Route::post('/user/destroy/{id}', [UserController::class, 'destroy']);
+
+		//crud data jenis barang
+		Route::get('/jenisbarang', [JenisBarangController::class, 'index']);
+		Route::post('/jenisbarang/store', [JenisBarangController::class, 'store']);
+		Route::post('/jenisbarang/update/{id}', [JenisBarangController::class, 'update']);
+		Route::post('/jenisbarang/destroy/{id}', [JenisBarangController::class, 'destroy']);	});
+
 });

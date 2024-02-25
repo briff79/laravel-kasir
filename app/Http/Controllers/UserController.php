@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -22,9 +23,9 @@ class UserController extends Controller
 		User::create([
 			'name'	=> $request->name,
 			'email'	=> $request->email,
-			'pasword'	=> Hash::make($request->password),
+			'password'	=> Hash::make($request->password),
 			'role'	=> $request->role,
-		]};
+		]);
 		return redirect('/user')->with('success','Data Berhasil Disimpan');
 	}
 
@@ -35,9 +36,9 @@ class UserController extends Controller
 			->update([
 			'name'	=> $request->name,
 			'email'	=> $request->email,
-			'pasword'	=> Hash::make($request->password),
+			'password'	=> Hash::make($request->password),
 			'role'	=> $request->role,
-		]};
+		]);
 		return redirect('/user')->with('success','Data Berhasil Diubah');
 	}
 

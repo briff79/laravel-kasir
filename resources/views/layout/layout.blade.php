@@ -5,11 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ $title }}</title>
+    <title>{{ $tittle }}</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="/assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<link href="/assets/plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 
 </head>
@@ -45,7 +46,7 @@
                     <b class="logo-abbr"><img src="/assets/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="/assets/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="/assets/images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -74,7 +75,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="/assets/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -84,7 +85,7 @@
                                         </li>
                               
                                         <hr class="my-2">
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="/logout"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -110,7 +111,7 @@
                         </a>
                     </li>
                     <li class="nav-label">UI Components</li>
-					@if (Auth::user()->role == 'admin')
+					@if (auth()->user()->role == 'admin')
                     <li>
                         <a href="/setdiskon" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Setting Diskon</span>
@@ -132,7 +133,7 @@
                         </a>
                     </li>
 					@endif
-					@if (Auth::user()->role == 'kasir')
+					@if (auth()->user()->role == 'kasir')
                     <li>
                         <a href="/transaksi" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Data Transaksi</span>
@@ -178,13 +179,15 @@
     <script src="/assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
-	<script src="/assets/js/sweetalert/sweetalert.min.js"></script>
+	<script src="/assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+	<script src="/assets/plugins/sweetalert/js/sweetalert.init.js"></script>
 	<script src="/assets/js/bootstrap4-notify/bootstrap-notify.min.js"></script>
-	
+	<script src="/assets/js/jquery.min.js"></script>
+
 	@if (session('success'))
 	<script>
 		var SweetAlert2Demo = function() {
-			var iniDemos = function() {
+			var initDemos = function() {
 				swal({
 					title: "{{ session('success') }}",
 					text: "{{ session('success') }}",
@@ -217,7 +220,7 @@
 	@if (session('error'))
 	<script>
 		var SweetAlert2Demo = function() {
-			var iniDemos = function() {
+			var initDemos = function() {
 				swal({
 					title: "{{ session('error') }}",
 					text: "{{ session('error') }}",
