@@ -12,10 +12,15 @@
     <link href="/assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="/assets/plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!--<script src="/assets/plugins/sweetalert/js/sweetalert.min.js"></script>-->
+	<!--<script src="/assets/plugins/sweetalert/js/sweetalert.init.js"></script>-->
 
 </head>
 
 <body>
+
 
     <!--*******************
         Preloader start
@@ -179,15 +184,13 @@
     <script src="/assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
-	<script src="/assets/plugins/sweetalert/js/sweetalert.min.js"></script>
-	<script src="/assets/plugins/sweetalert/js/sweetalert.init.js"></script>
+
 	<script src="/assets/js/bootstrap4-notify/bootstrap-notify.min.js"></script>
 	<script src="/assets/js/jquery.min.js"></script>
 
 	@if (session('success'))
 	<script>
-		var SweetAlert2Demo = function() {
-			var initDemos = function() {
+
 				swal({
 					title: "{{ session('success') }}",
 					text: "{{ session('success') }}",
@@ -202,25 +205,12 @@
 						}
 					}
 				});
-			};
-			
-			return {
-				init: function() {
-					initDemos();
-				},
-			};
-		}();
-		
-		jquery(document).ready(function() {
-			SweetAlert2Demo.init();
-		});
+
 	</script>
 	@endif
 
 	@if (session('error'))
 	<script>
-		var SweetAlert2Demo = function() {
-			var initDemos = function() {
 				swal({
 					title: "{{ session('error') }}",
 					text: "{{ session('error') }}",
@@ -235,18 +225,6 @@
 						}
 					}
 				});
-			};
-			
-			return {
-				init: function() {
-					initDemos();
-				},
-			};
-		}();
-		
-		jquery(document).ready(function() {
-			SweetAlert2Demo.init();
-		});
 	</script>
 	@endif
 
