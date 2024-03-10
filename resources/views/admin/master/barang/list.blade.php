@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-				<div class="card-header">
+					<div class="card-header">
 						<div class="d-flex align-item-center">
 							<h4 class="card-title">{{ $tittle }}</h4>
 							<button type="button" class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalCreate">
@@ -33,7 +33,7 @@
                                 
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration">
-                                <thead><th>Nama Barang</th>
+                                <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Barang</th>
