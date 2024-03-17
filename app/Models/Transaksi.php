@@ -5,17 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JenisBarang extends Model
+class Transaksi extends Model
 {
     use HasFactory;
 	
-	protected $table = 'tbl_jenis_barang';
+	protected $table = 'tbl_transaksi';
 
     protected $fillable = [
-        'nama_jenis',
+        'no_transaksi',
+		'tgl_transaksi',
+		'diskon',
+		'kembalian',
+		'uang_pembeli',
+		'total_bayar',
     ];
 	
 	const CREATED_AT = 'created_at';
 	const UPDATED_AT = 'updated_at';
-
 }

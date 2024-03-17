@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DiskonController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,12 @@ Route::middleware(['auth'])->group(function () {
 				
 		//Setting Profile
 		Route::get('/profile', [UserController::class, 'profile']);
-		Route::post('/profile/updateprofile/{id}', [UserController::class, 'updateprofile']);	});
+		Route::post('/profile/updateprofile/{id}', [UserController::class, 'updateprofile']);
+
+		//Transaksi
+		Route::get('/transaksi', [TransaksiController::class, 'index']);
+		Route::get('/transaksi/create', [TransaksiController::class, 'create']);
+	});
 	
 	Route::group(['middleware' => ['auth','checkRole:admin']], function(){
 		//crud data user
