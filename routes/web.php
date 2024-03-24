@@ -39,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
 		//Transaksi
 		Route::get('/transaksi', [TransaksiController::class, 'index']);
 		Route::get('/transaksi/create', [TransaksiController::class, 'create']);
+		Route::post('/transaksi/get_detail_barang', [TransaksiController::class, 'get_detail_barang']);
+		Route::post('/transaksi/addToCart', [TransaksiController::class, 'addToCart']);
+		Route::get('/transaksi/deleteCart/{id}', [TransaksiController::class, 'deleteCart']);
+		Route::post('/transaksi/store', [TransaksiController::class, 'store']);
 	});
 	
 	Route::group(['middleware' => ['auth','checkRole:admin']], function(){

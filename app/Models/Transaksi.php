@@ -14,6 +14,7 @@ class Transaksi extends Model
     protected $fillable = [
         'no_transaksi',
 		'tgl_transaksi',
+		'subtotal',
 		'diskon',
 		'kembalian',
 		'uang_pembeli',
